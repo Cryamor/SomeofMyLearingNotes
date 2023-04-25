@@ -1,8 +1,8 @@
 ## Git Bash配置与第一次上传
 
-初始是长这个样子的【用户名@电脑型号】
+安装好了之后，初始是长这个样子的【用户名@电脑型号】
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425164131990.png" alt="image-20230425164131990" style="zoom:150%;" />
+<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425164131990.png" alt="image-20230425164131990" style="zoom:125%;" />
 
 ### 设置用户
 
@@ -13,7 +13,7 @@ git config --global user.name "Your name"
 git config --global user.email "email@example.com"
 ```
 
-ctrl+V不能粘贴？试试进设置（Options->Keys）里把这个![image-20230425183600549](C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425183600549.png)勾上然后ctrl+shift+V
+**ctrl+v不能粘贴？试试进设置（Options->Keys）里把这个![image-20230425183600549](C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425183600549.png)勾上然后ctrl+shift+v**
 
 ### 本地文件操作
 
@@ -188,6 +188,8 @@ git remote -v
 git remote remove "rname"
 ```
 
+### 文件操作
+
 #### 文件上传
 
 将要上传文件添加到暂存区：
@@ -196,13 +198,19 @@ git remote remove "rname"
 git add "filename"
 ```
 
-如果要提交文件夹中所有的文件：
+提交文件夹中所有的文件（包括新文件和被修改的文件，但不包括被删除的文件）：
 
 ```
 git add .
 ```
 
-提交所有变化：
+将被修改和被删除的文件提交（不提交新的文件）：
+
+```
+git add -u
+```
+
+提交所有变化（可以看作是以上两个功能合成）：
 
 ```
 git add -A
@@ -252,7 +260,7 @@ git commit --amend -m "new notation"
 git push "rname" "branch" -f
 ```
 
-但小组合作的时候可不敢这样干，因为变化的大概率是远程仓库，强制推送了是会被组员杀掉的，用pull来保证自己的文件和远程仓库一致：
+但小组合作的时候可不敢这样干，因为变化的大概率是远程仓库，强制推送了是会被组员杀掉的，正确方法是先把文件pull下来，保证自己的文件和远程仓库一致：
 
 ```
 git pull "rname"
