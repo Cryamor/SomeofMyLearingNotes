@@ -162,7 +162,7 @@ ssh -T git@github.com
 
 在刚建的repository里复制链接
 
-注意：只有你是仓库主人时才能用SSH连接，项目成员只能用HTTPS连接，但操作其实都一样
+**注意：**只有你是仓库主人时才能用SSH连接，项目成员只能用HTTPS连接，但操作其实都一样
 
 <img src="./assets/image-20230425175441639.png" alt="image-20230425175441639" style="zoom:60%;" />
 
@@ -274,6 +274,8 @@ git merge "rname"
 ```
 
 #### 文件克隆
+
+**再次注意：**只有你是仓库主人时才能用SSH连接，项目成员只能用HTTPS连接
 
 <img src="./assets/image-20230425182929514.png" alt="image-20230425182929514" style="zoom:67%;" />
 
