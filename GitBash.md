@@ -2,7 +2,7 @@
 
 安装好了之后，初始是长这个样子的【用户名@电脑型号】
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425164131990.png" alt="image-20230425164131990" style="zoom:125%;" />
+<img src="./assets/image-20230425164131990.png" alt="image-20230425164131990" style="zoom:125%;" />
 
 ### 设置用户
 
@@ -13,7 +13,7 @@ git config --global user.name "Your name"
 git config --global user.email "email@example.com"
 ```
 
-**ctrl+v不能粘贴？试试进设置（Options->Keys）里把这个![image-20230425183600549](C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425183600549.png)勾上然后ctrl+shift+v**
+**ctrl+v不能粘贴？试试进设置（Options->Keys）里把这个![image-20230425183600549](./assets/image-20230425183600549.png)勾上然后ctrl+shift+v**
 
 ### 本地文件操作
 
@@ -23,7 +23,7 @@ git config --global user.email "email@example.com"
 
 1. 进入文件夹，空白处右键选择 “Git Bash Here”
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425165955701.png" alt="image-20230425165955701" style="zoom:50%;" />
+<img src="./assets/image-20230425165955701.png" alt="image-20230425165955701" style="zoom:50%;" />
 
 2. 在Git Bash中输入路径
 
@@ -47,7 +47,7 @@ pwd
 ls
 ```
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425170726126.png" alt="image-20230425170726126" style="zoom:75%;" />
+<img src="./assets/image-20230425170726126.png" alt="image-20230425170726126" style="zoom:75%;" />
 
 #### 退出
 
@@ -95,11 +95,11 @@ rm -r "foldername"
 git init
 ```
 
-文件夹中会出现名为.git的隐藏文件夹![image-20230425171811634](C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425171811634.png)
+文件夹中会出现名为.git的隐藏文件夹![image-20230425171811634](./assets/image-20230425171811634.png)
 
 Github中选择new repository建个仓库
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425171955585.png" alt="image-20230425171955585" style="zoom:80%;" />
+<img src="./assets/image-20230425171955585.png" alt="image-20230425171955585" style="zoom:80%;" />
 
 #### 建立连接
 
@@ -130,7 +130,7 @@ Enter file in which to save the key (/c/Users/ZMC/.ssh/id_rsa):
 
 创建成功了他会展示给你看密钥长啥样
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-10086.png" style="zoom:67%;" />
+<img src="./assets/image-10086.png" style="zoom:67%;" />
 
 添加SSH Key到Github
 
@@ -154,7 +154,7 @@ ssh -T git@github.com
 
 按要求输入yes
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425175043226.png" alt="image-20230425175043226" style="zoom:67%;" />
+<img src="./assets/image-20230425175043226.png" alt="image-20230425175043226" style="zoom:67%;" />
 
 ##### SSH 连接
 
@@ -164,7 +164,7 @@ ssh -T git@github.com
 
 注意：只有你是仓库主人时才能用SSH连接，项目成员只能用HTTPS连接，但操作其实都一样
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425175441639.png" alt="image-20230425175441639" style="zoom:60%;" />
+<img src="./assets/image-20230425175441639.png" alt="image-20230425175441639" style="zoom:60%;" />
 
 在Git Bash里这样
 
@@ -238,7 +238,7 @@ git push "rname" "branch"
 
 就好了，Github上也能看到文件放上去了
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425181603159.png" alt="image-20230425181603159" style="zoom:80%;" />
+<img src="./assets/image-20230425181603159.png" alt="image-20230425181603159" style="zoom:80%;" />
 
 #### 文件修改、下拉
 
@@ -275,7 +275,7 @@ git merge "rname"
 
 #### 文件克隆
 
-<img src="C:\Users\ZMC\AppData\Roaming\Typora\typora-user-images\image-20230425182929514.png" alt="image-20230425182929514" style="zoom:67%;" />
+<img src="./assets/image-20230425182929514.png" alt="image-20230425182929514" style="zoom:67%;" />
 
 在你想要克隆到的位置打开Git Bash
 
