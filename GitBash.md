@@ -284,3 +284,49 @@ git merge "rname"
 ```
 git clone "link"
 ```
+
+#### 文件状态
+
+```
+git status
+```
+
+### 分支操作
+
+查看分支：
+
+```
+git branch
+```
+
+创建分支：基于当前分支创建一个新分支，新分支中代码与当前分支完全一致
+
+```
+git branch "branchname"
+```
+
+切换分支：
+
+```
+git checkout "branchname"
+```
+
+<img src="./assets/image-20230427142403595.png" alt="image-20230427142403595" style="zoom:67%;" />
+
+删除分支：
+
+```
+git branch -d "branchname"
+```
+
+合并分支：
+
+功能分支开发测试完毕后，将完成后的代码合并至主分支
+
+先切换至master分支，然后将分支代码合并
+
+```
+git checkout master
+git merge "branchname"
+```
+
