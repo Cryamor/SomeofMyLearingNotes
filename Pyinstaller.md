@@ -25,6 +25,7 @@ pyinstaller -F asr.py
 - `-F` 表示覆盖
 - `-w` 表示不要控制台窗口
 - `-i xxx.ico` 表示用`xxx.ico`作为`icon`图标
+- `-n name`表示生成名为`name`的`spec`文件
 
 成功后会有提示：
 
