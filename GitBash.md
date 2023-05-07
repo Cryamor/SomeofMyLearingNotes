@@ -19,13 +19,13 @@ git config --global user.email "email@example.com"
 
 #### 进入文件夹
 
-比如我要打开之前的某次作业文件夹 D:\homeWork\sem2\BigHW4
+比如我要打开之前的某次作业文件夹 `D:\homeWork\sem2\BigHW4`
 
 1. 进入文件夹，空白处右键选择 “Git Bash Here”
 
 <img src="./assets/image-20230425165955701.png" alt="image-20230425165955701" style="zoom:50%;" />
 
-2. 在Git Bash中输入路径
+2. 在`Git Bash`中输入路径
 
    ```
     cd d:/homeWork/sem2/BigHW4
@@ -97,7 +97,7 @@ git init
 
 文件夹中会出现名为.git的隐藏文件夹![image-20230425171811634](./assets/image-20230425171811634.png)
 
-Github中选择new repository建个仓库
+`Github`中选择`new repository`建个仓库
 
 <img src="./assets/image-20230425171955585.png" alt="image-20230425171955585" style="zoom:80%;" />
 
@@ -105,7 +105,7 @@ Github中选择new repository建个仓库
 
 ##### SSH Keys配置
 
-先检查一下电脑上有没有SSH Keys:
+先检查一下电脑上有没有`SSH Keys`:
 
 ```
 ~/.ssh ls
@@ -124,7 +124,7 @@ Generating public/private rsa key pair.
 Enter file in which to save the key (/c/Users/ZMC/.ssh/id_rsa):
 ```
 
-直接回车就行，默认生成id_rsa和id_rsa.pub两个密钥文件
+直接回车就行，默认生成`id_rsa`和`id_rsa.pub`两个密钥文件
 
 然后需要设置密码，可以直接回车就是不设置，不麻烦
 
@@ -132,19 +132,19 @@ Enter file in which to save the key (/c/Users/ZMC/.ssh/id_rsa):
 
 <img src="./assets/image-10086.png" style="zoom:67%;" />
 
-添加SSH Key到Github
+添加`SSH Key`到`Github`
 
-把.pub文件内容复制到剪贴板上
+把`.pub`文件内容复制到剪贴板上
 
 ```
 pbcopy < ~/.ssh/id_rsa.pub
 ```
 
-pbcopy不好使的话直接去打开文件复制
+`pbcopy`不好使的话直接去打开文件复制
 
-在Github的设置中找到 SSH and GPG keys
+在`Github`的设置中找到 `SSH and GPG keys`
 
-选择New SSH key把复制的密钥丢进去
+选择`New SSH key`把复制的密钥丢进去
 
 建立完成后可以测试一下
 
@@ -156,23 +156,23 @@ ssh -T git@github.com
 
 <img src="./assets/image-20230425175043226.png" alt="image-20230425175043226" style="zoom:67%;" />
 
-##### SSH 连接
+##### `SSH` 连接
 
-这一步完全按照Github上的提示做就好
+这一步完全按照`Github`上的提示做就好
 
-在刚建的repository里复制链接
+在刚建的`repository`里复制链接
 
-**注意：**只有你是仓库主人时才能用SSH连接，项目成员只能用HTTPS连接，但操作其实都一样
+**注意：**只有你是仓库主人时才能用`SSH`连接，项目成员只能用`HTTPS`连接，但操作其实都一样
 
 <img src="./assets/image-20230425175441639.png" alt="image-20230425175441639" style="zoom:60%;" />
 
-在Git Bash里这样
+在`Git Bash`里这样
 
 ```
 git remote add "rname" "link"
 ```
 
-rname是远程仓库的名字，默认是origin，link就是刚才复制的那段链接
+`rname`是远程仓库的名字，默认是`origin`，`link`就是刚才复制的那段链接
 
 建了也没个提示，试试：
 
@@ -180,7 +180,7 @@ rname是远程仓库的名字，默认是origin，link就是刚才复制的那�
 git remote -v
 ```
 
-可以看到叫origin的仓库，一个push和一个fetch
+可以看到叫`origin`的仓库，一个`push`和一个`fetch`
 
 如果不想再连接这个仓库了：
 
@@ -216,7 +216,7 @@ git add -u
 git add -A
 ```
 
-将暂存区文件保存到仓库的历史记录中，不加-m的话会进入vim（默认是vim，也可以改成Vscode之类的）
+将暂存区文件保存到仓库的历史记录中，不加`-m`的话会进入`vim`（默认是`vim`，也可以改成`Vscode`之类的）
 
 ```
 git commit -m "notation"
@@ -228,15 +228,15 @@ git commit -m "notation"
 git push -u "rname" "branch"
 ```
 
-比如现在只有主分支，那么写master就好了，或者按Github推荐的写个main，合作项目的时候往自己的分支上推
+比如现在只有主分支，那么写master就好了，或者按`Github`推荐的写个`main`，合作项目的时候往自己的分支上推
 
-第一次推送master时加上-u参数才会把本地和远程的master分支关联起来，以后就只需要：
+第一次推送`master`时加上`-u`参数才会把本地和远程的`master`分支关联起来，以后就只需要：
 
 ```
 git push "rname" "branch"
 ```
 
-就好了，Github上也能看到文件放上去了
+就好了，`Github`上也能看到文件放上去了
 
 <img src="./assets/image-20230425181603159.png" alt="image-20230425181603159" style="zoom:80%;" />
 
@@ -248,19 +248,19 @@ git push "rname" "branch"
 git log
 ```
 
-想改commit：
+想改`commit`：
 
 ```
 git commit --amend -m "new notation"
 ```
 
-想改文件名，按照上面步骤重新走一遍就好了，报错的话就是因为你本地仓库变了，加个-f，强制推送：
+想改文件名，按照上面步骤重新走一遍就好了，报错的话就是因为你本地仓库变了，加个`-f`，强制推送：
 
 ```
 git push "rname" "branch" -f
 ```
 
-但小组合作的时候可不敢这样干，因为变化的大概率是远程仓库，强制推送了是会被组员杀掉的，正确方法是先把文件pull下来，保证自己的文件和远程仓库一致：
+但小组合作的时候可不敢这样干，因为变化的大概率是远程仓库，强制推送了是会被组员杀掉的，正确方法是先把文件`pull`下来，保证自己的文件和远程仓库一致：
 
 ```
 git pull "rname"
@@ -275,11 +275,11 @@ git merge "rname"
 
 #### 文件克隆
 
-**再次注意：**只有你是仓库主人时才能用SSH连接，项目成员只能用HTTPS连接
+**再次注意：**只有你是仓库主人时才能用`SSH`连接，项目成员只能用`HTTPS`连接
 
 <img src="./assets/image-20230425182929514.png" alt="image-20230425182929514" style="zoom:67%;" />
 
-在你想要克隆到的位置打开Git Bash
+在你想要克隆到的位置打开`Git Bash`
 
 ```
 git clone "link"
@@ -289,6 +289,16 @@ git clone "link"
 
 ```
 git status
+```
+
+#### 文件删除
+
+上传了某些没用的东西（.`idea`,`__pycache__`之类），不会删除本地文件
+
+```
+git rm -r --cached "filename or foldername"
+git commit -m "notation"
+git push
 ```
 
 ### 分支操作
