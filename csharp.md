@@ -384,3 +384,56 @@ namespace Project1
 
 
 
+## 一些新操作
+
+### Lambda 表达式
+
+Lambda 表达式使用`=>`符号（lambda声明运算符）
+
+#### 表达式 lambda
+
+```
+(input-parameters) => expression
+```
+
+#### 语句 lambda
+
+语句要在大括号中
+
+```c#
+Action<string> greet = name =>
+{
+    string greeting = $"Hello {name}!";
+    Console.WriteLine(greeting);
+};
+greet("World");
+// Output:
+// Hello World!
+```
+
+#### 输入参数
+
+参数在小括号内，用逗号分隔。
+
+使用空括号指定零个输入参数：
+
+```c#
+Action line = () => Console.WriteLine();
+```
+
+若只有一个输入参数，则括号是可选的：
+
+```c#
+Func<double, double> cube = x => x * x * x;
+```
+
+```c#
+Func<int,int,int> Add = (x,y) => x+y;
+Console.WriteLine(Add(2,3));
+//Output: 5
+```
+
+```c#
+Func<int, string, bool> isTooLong = (int x, string s) => s.Length > x;
+```
+
