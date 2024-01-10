@@ -437,3 +437,5 @@ Console.WriteLine(Add(2,3));
 Func<int, string, bool> isTooLong = (int x, string s) => s.Length > x;
 ```
 
+### LINQ
+
