@@ -13,62 +13,62 @@ Spring Boot简化Spring应用的创建及部署，克服Spring的配置繁琐（
 ### HelloWorld
 
 1. Maven构建一个Module，在`pom.xml`中添加所需要继承的父工程和Web开发的起步依赖坐标：
-
-    ```xml
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.4</version>
-    </parent>
-    ```
-
-    ```xml
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
-    ```
+   
+   ```xml
+   <parent>
+       <groupId>org.springframework.boot</groupId>
+       <artifactId>spring-boot-starter-parent</artifactId>
+       <version>3.1.4</version>
+   </parent>
+   ```
+   
+   ```xml
+   <dependencies>
+       <dependency>
+           <groupId>org.springframework.boot</groupId>
+           <artifactId>spring-boot-starter-web</artifactId>
+       </dependency>
+   </dependencies>
+   ```
 
 2. 在`src\java`中创建包和类`org.example.controller.HelloController`，添加一个`hello`方法：
-
-    ```java
-    @RestController
-    public class HelloController {
-        @RequestMapping("/hello")
-        public String hello(){
-            return "Hello Spring Boot!";
-        }
-    }
-    ```
+   
+   ```java
+   @RestController
+   public class HelloController {
+       @RequestMapping("/hello")
+       public String hello(){
+           return "Hello Spring Boot!";
+       }
+   }
+   ```
 
 3. 创建引导类，即Spring Boot项目的入口：
-
-    ```java
-    @SpringBootApplication
-    public class HelloApplication {
-        public static void main(String[] args){
-            SpringApplication.run(HelloApplication.class, args);
-        }
-    }
-    ```
+   
+   ```java
+   @SpringBootApplication
+   public class HelloApplication {
+       public static void main(String[] args){
+           SpringApplication.run(HelloApplication.class, args);
+       }
+   }
+   ```
 
 4. 运行，在控制台中看到日志：
-
-    ```
-      .   ____          _            __ _ _
-     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-      '  |____| .__|_| |_|_| |_\__, | / / / /
-     =========|_|==============|___/=/_/_/_/
-     :: Spring Boot ::                (v3.1.4)
-    
-    2023-10-13T14:26:54.752+08:00  INFO 23532 --- [           main] org.example.HelloApplication             : Starting HelloApplication using Java 20.0.1 with PID 23532 (F:\IdeaProjects\SpringBootHello\target\classes started by ZMC in F:\IdeaProjects\SpringBootLearning)
-    ...
-    ```
-
+   
+   ```
+     .   ____          _            __ _ _
+    /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+   ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+    \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+     '  |____| .__|_| |_|_| |_\__, | / / / /
+    =========|_|==============|___/=/_/_/_/
+    :: Spring Boot ::                (v3.1.4)
+   
+   2023-10-13T14:26:54.752+08:00  INFO 23532 --- [           main] org.example.HelloApplication             : Starting HelloApplication using Java 20.0.1 with PID 23532 (F:\IdeaProjects\SpringBootHello\target\classes started by ZMC in F:\IdeaProjects\SpringBootLearning)
+   ...
+   ```
+   
     注意`Tomcat started on port(s): 8080 (http) with context path`一行，访问[localhost:8080/hello](http://localhost:8080/hello)就能看到“Hello Spring Boot!”
 
 5. 可以使用[Spring Initializr](https://start.spring.io/)跳过配置步骤
@@ -76,14 +76,14 @@ Spring Boot简化Spring应用的创建及部署，克服Spring的配置繁琐（
 ### 配置
 
 1. properties方式：在`src\resources\application.properties`中配置自动识别内容和自定义内容：
-
+   
    ```properties
    server.port=8081
    server.address=127.0.0.1
    ```
 
 2. yaml/yml方式：在`src\resources\application.yml`（或`.yaml`）中配置，冒号后必须要有空格：
-
+   
    ```yaml
    server:
      port: 8081
@@ -93,19 +93,19 @@ Spring Boot简化Spring应用的创建及部署，克服Spring的配置繁琐（
 3. 配置优先级：Properties > yml > yaml，低优先级的重复配置会被覆盖
 
 4. yml获取配置，以获取person中的name为例，有三种方法：
-
+   
    - ```java
      @Value("${person.name}")
      private String name;
      System.out.println(name);
      ```
-
+   
    - ```java
      @Autowired
      private Environment env;
      System.out.println(env.getProperty("person.name"));
      ```
-
+   
    - ```java
      @Component
      @ConfigurationProperties(prefix = "person")
@@ -115,12 +115,12 @@ Spring Boot简化Spring应用的创建及部署，克服Spring的配置繁琐（
      public class HelloController{
          @Autowired
          private Person person;
-     	System.out.println(person.name);   
+         System.out.println(person.name);   
      }
      ```
 
 5. profile配置：`spring.profiles.active=dev`意味着会读取`application-dev.properties`中的配置信息（yaml同理）；或者在同一个yaml中用`---`分隔，但新版本中要改为`spring.config.activate.on-profile`；此外，还可以在命令行参数中指定：
-
+   
    ```yaml
    ---
    spring.config.on-profile: dev
@@ -135,7 +135,7 @@ Spring Boot简化Spring应用的创建及部署，克服Spring的配置繁琐（
    ```
 
 6. 内部配置加载顺序：
-
+   
    1. `file:./config/`
    2. `file:./`：项目根目录
    3. `classpath:/config/`
@@ -254,7 +254,7 @@ Spring Boot默认使用Tomcat作为内置服务器，可以在4种之间切换�
 
 ## AutoConfigure 自动配置原理
 
-###  @Conditional注解
+### @Conditional注解
 
 Q: Spring Boot是如何知道要创建哪个Bean的（有没有导入坐标）？
 
@@ -429,71 +429,71 @@ org.springframework.context.ApplicationContextInitializer=com.example.springboot
 ## 启动流程分析
 
 1. 构造（初始化）`SpringApplication`：
-
+   
    1. 配置source：构造函数入参`resourceLoader`和`primarySources`，后者判断非空后创建`LinkedHashSet`存储
-
+   
    2. 配置是否是Web环境：
-
+      
       ```java
       this.webApplicationType = WebApplicationType.deduceFromClasspath();   
       ```
-
+   
    3. 创建初始化构造器和应用监听器，获取工厂对象：
-
+      
       ```java
       this.setInitializers(this.getSpringFactoriesInstances(ApplicationContextInitializer.class));       this.setListeners(this.getSpringFactoriesInstances(ApplicationListener.class));
       ```
-
+   
    4. 配置应用的主方法所在类：
-
+      
       ```java
       this.mainApplicationClass = this.deduceMainApplicationClass();
       ```
 
 2. 执行`run`方法：
-
+   
    1. 启动计时：
-
+      
       ```java
       long startTime = System.nanoTime();
       ...
       Duration timeTakenToStartup = Duration.ofNanos(System.nanoTime() - startTime);
       ```
-
+   
    2. 启用监听，`starting`调用所有Listener的`starting`方法：
-
+      
       ```java
       SpringApplicationRunListeners listeners = this.getRunListeners(args);
       listeners.starting(bootstrapContext, this.mainApplicationClass);
       ```
-
+   
    3. 准备环境：
-
+      
       ```java
       ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
       ConfigurableEnvironment environment = this.prepareEnvironment(listeners, bootstrapContext, applicationArguments);
       ```
-
+   
    4. 打印Banner（Spring图标，可以用`banner.txt`自己改）：
-
+      
       ```java
       Banner printedBanner = this.printBanner(environment);
       ```
-
+   
    5. 准备context：
-
+      
       ```java
       context = this.createApplicationContext();
       context.setApplicationStartup(this.applicationStartup);
       this.prepareContext(bootstrapContext, context, environment, listeners, applicationArguments, printedBanner);
       ```
-
+   
    6. 刷新，创建Bean：
-
+      
       ```java
       this.refreshContext(context);
       ```
-
+   
    7. 结束计时，启动结束。
 
 ## Actuator 监控

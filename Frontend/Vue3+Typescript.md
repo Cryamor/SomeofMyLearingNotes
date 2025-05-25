@@ -226,7 +226,7 @@ Mustache语法，即双大括号，双大括号将数据解释为纯文本，因
     import Person from './components/Person.vue'
     export default {
         name: "App",
-        components:{Person} // 注册组件
+        components:{Person} // 需要显式注册组件
     }
 </script>
 
@@ -250,7 +250,7 @@ Mustache语法，即双大括号，双大括号将数据解释为纯文本，因
 
 组合式API，将data、methods、computed等全部写入。
 
-`<script setup>`语法糖，不需要暴露（return）：
+`<script setup>`语法糖，不需要暴露（return），无需注册组件：
 
 ```vue
 <script lang="ts" setup>
@@ -370,9 +370,9 @@ watch([x, () => y.value], ([newX, newY]) => {
 
 ```typescript
 const stop = watch(sum, (newValue, oldValue)=>{
-	console.log("sum change from ", oldValue, " to ", newValue)
-	if (newValue >= 10)
-		stop()
+    console.log("sum change from ", oldValue, " to ", newValue)
+    if (newValue >= 10)
+        stop()
 })
 ```
 
@@ -381,10 +381,10 @@ const stop = watch(sum, (newValue, oldValue)=>{
 1. 直接给 `watch()` 传入一个响应式对象（`reactive`），会**隐式**地创建一个深层侦听器，该回调函数在所有嵌套的变更时都会被触发
 
 2. 对于`ref`则只监视地址，可以**显式**地加上`deep`选项，强制转换为深层监视：
-
+   
    ```typescript
    watch(source, (newValue, oldValue)=>{
-   	console.log(oldValue, newValue)   
+       console.log(oldValue, newValue)   
    },{deep:true})
    ```
 
@@ -394,7 +394,7 @@ const stop = watch(sum, (newValue, oldValue)=>{
 
 ```typescript
 watch(source, (newValue, oldValue)=>{
-	console.log(oldValue, newValue)   
+    console.log(oldValue, newValue)   
 },{once:true})
 ```
 
@@ -410,3 +410,249 @@ watchEffect(()=>{
 ```
 
 ### 模版引用
+
+先声明一个ref：
+
+```typescript
+const input = ref(null)
+```
+
+然后在标签中加入：
+
+```typescript
+<input ref="input">
+```
+
+挂在之后便可引用：
+
+```typescript
+console.log(input.value)
+// <input>
+```
+
+### 条件渲染`v-if`
+
+```html
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else-if="type === 'C'">
+  C
+</div>
+<div v-else>
+  Not A/B/C
+</div>
+```
+
+### 循环渲染`v-for`
+
+### Hooks
+
+## 生命周期
+
+![lifecycle_zh-CN.FtDDVyNA.png](./assets/lifecycle_zh-CN.FtDDVyNA.png)
+
+Vue2到Vue3变化：
+
+```
+Vue2--------------vue3
+beforeCreate  -> setup()
+created       -> setup()
+beforeMount   -> onBeforeMount
+mounted       -> onMounted
+beforeUpdate  -> onBeforeUpdate
+updated       -> onUpdated
+beforeDestroy -> onBeforeUnmount
+destroyed     -> onUnmounted
+
+activated     -> onActivated
+deactivated   -> onDeactivated
+errorCaptured -> onErrorCaptured
+```
+
+除了这些钩子函数外，Vue3还增加了`onRenderTracked` 和`onRenderTriggered`函数
+
+## 路由Router
+
+在`index.ts`中声明所用的路由，Vue3中必须声明路由模式：
+
+```typescript
+// src/router/index.ts
+
+const router = createRouter({
+    history:createWebHistory(),  // 路由模式
+    routes:[
+        {
+            path:'/home',
+            component:Home
+        },
+        {
+            name:{
+            name:'news',
+            path:'/news',
+            component:News,
+            children:[
+                {name:'news-detail',path:'detail',component:Detail}
+            ]
+        },
+        {
+            path:'/about',
+            component:About
+        },
+        {
+            path:'/',
+            redirect:'/home' 
+        }
+    ]
+})
+
+export default router  // 暴露
+```
+
+此外还需要在`main.ts`中调用`use()`：
+
+```typescript
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+app.use(router)
+app.mount('#app')
+```
+
+### `RouterLink`和`RouterView`
+
+```html
+  <div class="app">
+    <h2 class="title">Navigation</h2>
+    <div class="navigation">
+      <RouterLink to="/home">Home</RouterLink>
+      <RouterLink to="/news">News</RouterLink>
+      <RouterLink :to="{path:'/about'}">About</RouterLink>
+    </div>
+    <h2 class="title">Demonstration</h2>
+    <div class="demonstration">
+      <p>Content</p>
+      <hr>
+      <RouterView></RouterView>
+    </div>
+  </div>
+```
+
+`<RouterLink replace ...>`开启浏览器历史记录替换模式
+
+### query参数
+
+- 形如`news?a=1&b=2&c=3`
+
+- 使用方法：先`useRoute`，然后形如`route.query.a`即可找到query中的项：
+  
+  ```typescript
+  import { useRoute } from 'vue-router';
+  let route = useRoute()
+  ```
+
+### params参数
+
+- 形如`/news/a/b/c`
+
+- 传递params参数时，不能使用path，需要提前在路由规则中占位：
+
+```typescript
+name:'news',
+path:'/news/:id/:title',
+component:News,typescript
+```
+
+```html
+<RouterLink :to="{
+    name:'news-detail',
+    params:{
+        id:news.id,
+        title:news.title,
+        content:news.content
+    }
+}">
+    {{news.title}}
+</RouterLink>
+```
+
+### props
+
+先在规则中设置`props`为`true`：
+
+```typescript
+         {
+            name:'news',
+            path:'/news',
+            component:News,
+            children:[
+                {
+                    name:'news-detail',
+                    path:'detail/:id/:title/:content',
+                    component:Detail,
+                    props:true
+                }
+            ]
+        },    
+```
+
+用`defineProps()`调用后直接使用：
+
+```
+<template>
+    <div class="detail">
+        <ul class="news-content">
+            <li>No.: {{ id }}</li>
+            <li>Title: {{ title }}</li>
+            <li>Content: {{ content }}</li>
+        </ul>
+    </div>
+</template>
+
+<script setup lang="ts" name="Detail">
+    defineProps(['id','title','content'])
+</script>
+```
+
+### 编程式路由导航
+
+```typescript
+import {useRouter} from 'vue-router'
+const router = useRouter()
+...
+
+router.push('./')
+```
+
+## Typescript
+
+声明一个接口，`export`分别暴露：
+
+```typescript
+// src/types/index.ts
+export interface PersonI {
+    id:string,
+    name:string,
+    age:number,
+    addr?:string
+}
+```
+
+```typescript
+<script lang="ts" setup>
+    import {type PersonI} from '@/types'
+
+    let person:PersonI = {id:"11145141919810",name:"zhang",age:18}
+    let personList:Array<PersonI> = [
+        {id:"1234",name:"li",age:20},
+        {id:"5678",name:"wang",age:22,addr:"Shanghai"}
+    ]
+</script>
+```
+
+类型引用前要加`type`
